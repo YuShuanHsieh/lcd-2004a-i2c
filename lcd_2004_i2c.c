@@ -35,10 +35,10 @@ static void lcd_send_byte(struct lcd_device *lcd, uint8_t val, int mode) {
 
     // The data can be sent before or after sending RS and RW signals.
     // But data should be available before toggling LCD enable pin.
-    i2c_write_byte(high);
+    i2c_write_byte(lcd->i2c, lcd->addr, high);
     lcd_toggle_enable(lcd, high);
 
-    i2c_write_byte(low);
+    i2c_write_byte(lcd->i2c, lcd->addr, low);
     lcd_toggle_enable(lcd, low);
 }
 
